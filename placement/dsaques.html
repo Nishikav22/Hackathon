@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 100 DSA Questions - GLA Portal</title>
+
+<style>
+  * {margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif;}
+  body {
+    background: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat fixed;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: -1;
+  }
+
+  nav {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(255, 153, 51, 0.3);
+  }
+  .logo {font-size: 1.5rem; font-weight: 700; color: #ff9933;}
+  nav a {color: white; text-decoration: none; font-weight: 500;}
+  nav a:hover {color: #ff9933;}
+
+  h1 {margin-top: 100px; color: #ff9933; font-size: 2.5rem; animation: fadeIn 1s ease;}
+  .question-container {
+    width: 90%; max-width: 900px; margin-top: 40px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    animation: fadeInUp 1.5s ease;
+  }
+  .question {
+    background: rgba(255, 255, 255, 0.05);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  .question a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+  }
+  .question:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 153, 51, 0.2);
+    box-shadow: 0 0 15px #ff9933;
+  }
+  .question:hover a {color: #ff9933;}
+
+  @keyframes fadeInUp {from {opacity: 0; transform: translateY(30px);} to {opacity: 1; transform: translateY(0);}}
+  @keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">GLA DSA Questions</div>
+  <a href="index.html">⬅ Back to Home</a>
+</nav>
+
+<h1>💡 Top 100 DSA Questions Asked by Companies</h1>
+
+<div class="question-container" id="questionList"></div>
+
+<script>
+const questions = [
+  ["1️⃣ Two Sum", "https://leetcode.com/problems/two-sum/"],
+  ["2️⃣ Reverse Linked List", "https://leetcode.com/problems/reverse-linked-list/"],
+  ["3️⃣ Detect Cycle in Linked List", "https://leetcode.com/problems/linked-list-cycle/"],
+  ["4️⃣ Merge Intervals", "https://leetcode.com/problems/merge-intervals/"],
+  ["5️⃣ Kth Largest Element in Array", "https://leetcode.com/problems/kth-largest-element-in-an-array/"],
+  ["6️⃣ Longest Substring Without Repeating Characters", "https://leetcode.com/problems/longest-substring-without-repeating-characters/"],
+  ["7️⃣ Maximum Subarray Sum (Kadane’s Algorithm)", "https://leetcode.com/problems/maximum-subarray/"],
+  ["8️⃣ Minimum Window Substring", "https://leetcode.com/problems/minimum-window-substring/"],
+  ["9️⃣ Search in Rotated Sorted Array", "https://leetcode.com/problems/search-in-rotated-sorted-array/"],
+  ["🔟 Find Median of Two Sorted Arrays", "https://leetcode.com/problems/median-of-two-sorted-arrays/"],
+  ["11️⃣ Implement LRU Cache", "https://leetcode.com/problems/lru-cache/"],
+  ["12️⃣ Word Break Problem", "https://leetcode.com/problems/word-break/"],
+  ["13️⃣ Clone Graph", "https://leetcode.com/problems/clone-graph/"],
+  ["14️⃣ Detect Cycle in Directed Graph", "https://leetcode.com/problems/course-schedule/"],
+  ["15️⃣ Topological Sort", "https://leetcode.com/problems/course-schedule-ii/"],
+  ["16️⃣ Intersection of Two Linked Lists", "https://leetcode.com/problems/intersection-of-two-linked-lists/"],
+  ["17️⃣ Lowest Common Ancestor of BST", "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"],
+  ["18️⃣ Balanced Binary Tree", "https://leetcode.com/problems/balanced-binary-tree/"],
+  ["19️⃣ Longest Palindromic Substring", "https://leetcode.com/problems/longest-palindromic-substring/"],
+  ["20️⃣ 0/1 Knapsack Problem (Subset Sum Variation)", "https://leetcode.com/problems/partition-equal-subset-sum/"],
+  ["21️⃣ Valid Parentheses", "https://leetcode.com/problems/valid-parentheses/"],
+  ["22️⃣ Merge Two Sorted Lists", "https://leetcode.com/problems/merge-two-sorted-lists/"],
+  ["23️⃣ Remove Nth Node From End of List", "https://leetcode.com/problems/remove-nth-node-from-end-of-list/"],
+  ["24️⃣ Palindrome Linked List", "https://leetcode.com/problems/palindrome-linked-list/"],
+  ["25️⃣ Rotate Image (Matrix)", "https://leetcode.com/problems/rotate-image/"],
+  ["26️⃣ Set Matrix Zeroes", "https://leetcode.com/problems/set-matrix-zeroes/"],
+  ["27️⃣ Spiral Matrix", "https://leetcode.com/problems/spiral-matrix/"],
+  ["28️⃣ Search a 2D Matrix", "https://leetcode.com/problems/search-a-2d-matrix/"],
+  ["29️⃣ Next Permutation", "https://leetcode.com/problems/next-permutation/"],
+  ["30️⃣ Trapping Rain Water", "https://leetcode.com/problems/trapping-rain-water/"],
+  ["31️⃣ Best Time to Buy and Sell Stock", "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"],
+  ["32️⃣ Subarray Sum Equals K", "https://leetcode.com/problems/subarray-sum-equals-k/"],
+  ["33️⃣ Longest Consecutive Sequence", "https://leetcode.com/problems/longest-consecutive-sequence/"],
+  ["34️⃣ Validate Binary Search Tree", "https://leetcode.com/problems/validate-binary-search-tree/"],
+  ["35️⃣ Same Tree", "https://leetcode.com/problems/same-tree/"],
+  ["36️⃣ Symmetric Tree", "https://leetcode.com/problems/symmetric-tree/"],
+  ["37️⃣ Maximum Depth of Binary Tree", "https://leetcode.com/problems/maximum-depth-of-binary-tree/"],
+  ["38️⃣ Binary Tree Level Order Traversal", "https://leetcode.com/problems/binary-tree-level-order-traversal/"],
+  ["39️⃣ Construct Binary Tree from Traversals", "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/"],
+  ["40️⃣ Serialize and Deserialize Binary Tree", "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"],
+  ["41️⃣ Diameter of Binary Tree", "https://leetcode.com/problems/diameter-of-binary-tree/"],
+  ["42️⃣ Maximum Path Sum", "https://leetcode.com/problems/binary-tree-maximum-path-sum/"],
+  ["43️⃣ Flatten Binary Tree to Linked List", "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/"],
+  ["44️⃣ Count Inversions", "https://leetcode.com/problems/count-of-smaller-numbers-after-self/"],
+  ["45️⃣ Number of Islands", "https://leetcode.com/problems/number-of-islands/"],
+  ["46️⃣ Surrounded Regions", "https://leetcode.com/problems/surrounded-regions/"],
+  ["47️⃣ Rotten Oranges", "https://leetcode.com/problems/rotting-oranges/"],
+  ["48️⃣ Word Search", "https://leetcode.com/problems/word-search/"],
+  ["49️⃣ Course Schedule", "https://leetcode.com/problems/course-schedule/"],
+  ["50️⃣ Minimum Path Sum", "https://leetcode.com/problems/minimum-path-sum/"],
+  ["51️⃣ Unique Paths", "https://leetcode.com/problems/unique-paths/"],
+  ["52️⃣ Coin Change", "https://leetcode.com/problems/coin-change/"],
+  ["53️⃣ Longest Increasing Subsequence", "https://leetcode.com/problems/longest-increasing-subsequence/"],
+  ["54️⃣ Edit Distance", "https://leetcode.com/problems/edit-distance/"],
+  ["55️⃣ House Robber", "https://leetcode.com/problems/house-robber/"],
+  ["56️⃣ Jump Game", "https://leetcode.com/problems/jump-game/"],
+  ["57️⃣ Climbing Stairs", "https://leetcode.com/problems/climbing-stairs/"],
+  ["58️⃣ Combination Sum", "https://leetcode.com/problems/combination-sum/"],
+  ["59️⃣ Permutations", "https://leetcode.com/problems/permutations/"],
+  ["60️⃣ Subsets", "https://leetcode.com/problems/subsets/"],
+  ["61️⃣ N-Queens", "https://leetcode.com/problems/n-queens/"],
+  ["62️⃣ Sudoku Solver", "https://leetcode.com/problems/sudoku-solver/"],
+  ["63️⃣ Merge K Sorted Lists", "https://leetcode.com/problems/merge-k-sorted-lists/"],
+  ["64️⃣ Implement Trie (Prefix Tree)", "https://leetcode.com/problems/implement-trie-prefix-tree/"],
+  ["65️⃣ Add Two Numbers", "https://leetcode.com/problems/add-two-numbers/"],
+  ["66️⃣ Valid Anagram", "https://leetcode.com/problems/valid-anagram/"],
+  ["67️⃣ Group Anagrams", "https://leetcode.com/problems/group-anagrams/"],
+  ["68️⃣ Product of Array Except Self", "https://leetcode.com/problems/product-of-array-except-self/"],
+  ["69️⃣ Find All Anagrams in a String", "https://leetcode.com/problems/find-all-anagrams-in-a-string/"],
+  ["70️⃣ Minimum Window Subsequence", "https://leetcode.com/problems/minimum-window-subsequence/"],
+  ["71️⃣ Binary Search", "https://leetcode.com/problems/binary-search/"],
+  ["72️⃣ Implement Queue using Stacks", "https://leetcode.com/problems/implement-queue-using-stacks/"],
+  ["73️⃣ Implement Stack using Queues", "https://leetcode.com/problems/implement-stack-using-queues/"],
+  ["74️⃣ Valid Palindrome", "https://leetcode.com/problems/valid-palindrome/"],
+  ["75️⃣ Remove Duplicates from Sorted Array", "https://leetcode.com/problems/remove-duplicates-from-sorted-array/"],
+  ["76️⃣ Find the Duplicate Number", "https://leetcode.com/problems/find-the-duplicate-number/"],
+  ["77️⃣ Missing Number", "https://leetcode.com/problems/missing-number/"],
+  ["78️⃣ Find All Duplicates in Array", "https://leetcode.com/problems/find-all-duplicates-in-an-array/"],
+  ["79️⃣ Move Zeroes", "https://leetcode.com/problems/move-zeroes/"],
+  ["80️⃣ Rotate Array", "https://leetcode.com/problems/rotate-array/"],
+  ["81️⃣ Sort Colors", "https://leetcode.com/problems/sort-colors/"],
+  ["82️⃣ Next Greater Element", "https://leetcode.com/problems/next-greater-element-i/"],
+  ["83️⃣ Daily Temperatures", "https://leetcode.com/problems/daily-temperatures/"],
+  ["84️⃣ Min Stack", "https://leetcode.com/problems/min-stack/"],
+  ["85️⃣ Evaluate Reverse Polish Notation", "https://leetcode.com/problems/evaluate-reverse-polish-notation/"],
+  ["86️⃣ Binary Tree Right Side View", "https://leetcode.com/problems/binary-tree-right-side-view/"],
+  ["87️⃣ Invert Binary Tree", "https://leetcode.com/problems/invert-binary-tree/"],
+  ["88️⃣ Sum Root to Leaf Numbers", "https://leetcode.com/problems/sum-root-to-leaf-numbers/"],
+  ["89️⃣ Path Sum II", "https://leetcode.com/problems/path-sum-ii/"],
+  ["90️⃣ Construct Binary Tree from Postorder & Inorder", "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/"],
+  ["91️⃣ Implement Binary Search Tree Iterator", "https://leetcode.com/problems/binary-search-tree-iterator/"],
+  ["92️⃣ Serialize and Deserialize BST", "https://leetcode.com/problems/serialize-and-deserialize-bst/"],
+  ["93️⃣ Lowest Common Ancestor of Binary Tree", "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/"],
+  ["94️⃣ Diameter of N-Ary Tree", "https://leetcode.com/problems/diameter-of-n-ary-tree/"],
+  ["95️⃣ Count and Say", "https://leetcode.com/problems/count-and-say/"],
+  ["96️⃣ Zigzag Level Order Traversal", "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/"],
+  ["97️⃣ Populating Next Right Pointers", "https://leetcode.com/problems/populating-next-right-pointers-in-each-node/"],
+  ["98️⃣ Maximum Product Subarray", "https://leetcode.com/problems/maximum-product-subarray/"],
+  ["99️⃣ Search Insert Position", "https://leetcode.com/problems/search-insert-position/"],
+  ["100️⃣ Find Peak Element", "https://leetcode.com/problems/find-peak-element/"]
+];
+
+const listDiv = document.getElementById("questionList");
+questions.forEach(([q, link]) => {
+  const div = document.createElement("div");
+  div.className = "question";
+  div.innerHTML = `<a href="${link}" target="_blank">${q}</a>`;
+  listDiv.appendChild(div);
+});
+</script>
+
+</body>
+</html>

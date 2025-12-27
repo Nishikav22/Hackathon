@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GLA Placement Preparation</title>
+  <style>
+    :root {
+      --accent-blue: #00bfff;
+      --accent-purple: #8a2be2;
+      --accent-yellow: #ffd166;
+      --accent-green: #00fa9a;
+      --glass: rgba(255,255,255,0.08);
+      --bg-img: url("https://noida.gla.ac.in/placement/placementBanner.webp");
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { scroll-behavior: smooth; font-family: "Inter", sans-serif; }
+    body {
+      background: var(--bg-img) center/cover fixed no-repeat;
+      color: #fff;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: -1;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      text-shadow: 0 0 12px var(--accent-blue);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover { color: var(--accent-yellow); }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      text-shadow: 0 0 15px var(--accent-blue);
+      animation: glowText 2s ease-in-out infinite alternate;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      color: #ddd;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 8px var(--accent-blue), 0 0 20px var(--accent-purple); }
+      to { text-shadow: 0 0 15px var(--accent-purple), 0 0 35px var(--accent-blue); }
+    }
+
+    /* Glowing Boxes */
+    .box-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      perspective: 1000px;
+      flex-wrap: wrap;
+    }
+    .box {
+      width: 230px; height: 180px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(0,191,255,0.25);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+    .box:nth-child(1):hover { transform: rotateY(10deg) scale(1.05); box-shadow: 0 0 25px var(--accent-yellow); }
+    .box:nth-child(2):hover { transform: rotateY(0deg) translateY(-10px) scale(1.05); box-shadow: 0 0 25px var(--accent-green); }
+    .box:nth-child(3):hover { transform: rotateY(-10deg) scale(1.05); box-shadow: 0 0 25px var(--accent-purple); }
+
+    .box .title { font-size: 1.2rem; font-weight: 600; }
+    .box .cta {
+      margin-top: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: var(--accent-blue);
+      color: #001;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .box .cta:hover { background: var(--accent-yellow); }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px var(--accent-blue);
+      color: var(--accent-blue);
+    }
+    section:nth-of-type(2n) h2 { color: var(--accent-green); text-shadow: 0 0 10px var(--accent-green); }
+    section:nth-of-type(3n) h2 { color: var(--accent-yellow); text-shadow: 0 0 10px var(--accent-yellow); }
+
+    section p, section li { color: #ddd; line-height: 1.8; font-size: 1.05rem; }
+    ul.feature-list { list-style: none; padding: 0; }
+    ul.feature-list li::before {
+      content: "✔ ";
+      color: var(--accent-yellow);
+    }
+
+    /* Upcoming Companies Section */
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .company-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    .company-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px var(--accent-blue);
+    }
+    .company-card h3 {
+      color: var(--accent-yellow);
+      margin-bottom: 0.5rem;
+    }
+    .company-card p {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+    .company-card button {
+      padding: 0.5rem 1rem;
+      background: var(--accent-blue);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .company-card button:hover {
+      background: var(--accent-yellow);
+    }
+
+    footer {
+      background: rgba(0,0,0,0.85);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    footer a { color: var(--accent-blue); text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: var(--accent-yellow); }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .box-container { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">GLA Prepration</div>
+    <ul>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#upcoming">Upcoming</a></li>
+      <li><a href="#strategies">Strategies</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>🚀 Ace Your GLA Placements with Confidence!</h1>
+    <p>Get access to the best curated content, mock tests, interview questions, and more to crack your dream job from GLA University.</p>
+    <div class="box-container">
+      <div class="box" data-link="tracks.html">
+        <div class="title">Tracks</div><button class="cta">Go</button>
+      </div>
+      <div class="box" data-link="year.html">
+        <div class="title">Your Year</div><button class="cta">Go</button>
+      </div>
+      <div class="box" data-link="package.html">
+        <div class="title">Package Oriented</div><button class="cta">Go</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <h2>🔍 Why Choose Us?</h2>
+    <p>Our app is designed specifically for GLA University students, focusing on unique placement patterns, company preferences, and interview rounds.</p>
+  </section>
+
+  <!-- UPCOMING COMPANIES -->
+  <section id="upcoming">
+    <h2>🏢 Upcoming Companies</h2>
+    <div class="company-grid">
+      <div class="company-card">
+        <h3>TCS</h3>
+        <p>Drive Date: Oct 25, 2025<br>Eligibility: All branches, 60%+</p>
+        <button>View Details</button>
+      </div>
+      <div class="company-card">
+        <h3>Infosys</h3>
+        <p>Drive Date: Nov 10, 2025<br>Eligibility: B.Tech & MCA</p>
+        <button>View Details</button>
+      </div>
+      <div class="company-card">
+        <h3>Wipro</h3>
+        <p>Drive Date: Nov 25, 2025<br>Eligibility: CSE, ECE, IT</p>
+        <button>View Details</button>
+      </div>
+      <div class="company-card">
+        <h3>Capgemini</h3>
+        <p>Drive Date: Dec 5, 2025<br>Eligibility: B.Tech, MCA</p>
+        <button>View Details</button>
+      </div>
+      <div class="company-card">
+        <h3>Cognizant</h3>
+        <p>Drive Date: Dec 15, 2025<br>Eligibility: All branches, 65%+</p>
+        <button>View Details</button>
+      </div>
+      <div class="company-card">
+        <h3>Amazon</h3>
+        <p>Drive Date: Jan 12, 2026<br>Eligibility: CSE, IT</p>
+        <button>View Details</button>
+      </div>
+      <div class="company-card">
+        <h3>Flipkart</h3>
+        <p>Drive Date: Jan 20, 2026<br>Eligibility: CSE, AIML</p>
+        <button>View Details</button>
+      </div>
+      <div class="company-card">
+        <h3>Tech Mahindra</h3>
+        <p>Drive Date: Feb 1, 2026<br>Eligibility: All branches, 60%+</p>
+        <button>View Details</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATEGIES -->
+  <section id="strategies">
+    <h2>💡 Smart Strategies for Cracking GLA Placements</h2>
+    <p>Prepare early, make projects, join hackathons, and use STAR format in interviews.</p>
+  </section>
+
+  <footer id="contact">
+    <p>© 2025 GLA Placement Prep | All Rights Reserved</p>
+    <p>
+      <a href="#">About Us</a> |
+      <a href="#">Contact</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms & Conditions</a> |
+      <a href="#">Follow Us</a>
+    </p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.box').forEach(b => {
+      b.addEventListener('click', () => window.location.href = b.dataset.link);
+    });
+  </script>
+</body>
+</html>

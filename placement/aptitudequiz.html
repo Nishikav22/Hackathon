@@ -72,7 +72,7 @@ function loadQuestion(){
   quizDiv.innerHTML = "";
   resultDiv.textContent = "";
   if(currentQuestion >= quizQuestions.length){
-    quizDiv.innerHTML = <h2>Quiz Completed!</h2><p>Your Score: ${score} / ${quizQuestions.length}</p>;
+    quizDiv.innerHTML = <h2>Quiz Completed!</h2> <p>Your Score: ${score} / ${quizQuestions.length}</p>;
     nextBtn.style.display = "none";
     return;
   }

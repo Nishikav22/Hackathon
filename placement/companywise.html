@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company-Wise DSA Questions - GLA Portal</title>
+
+<style>
+  * {margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif;}
+  body {
+    background: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat fixed;
+    min-height: 100vh;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: -1;
+  }
+
+  nav {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(255, 153, 51, 0.3);
+  }
+  .logo {font-size: 1.5rem; font-weight: 700; color: #ff9933;}
+  nav a {color: white; text-decoration: none; font-weight: 500;}
+  nav a:hover {color: #ff9933;}
+
+  h1 {margin-top: 100px; color: #ff9933; font-size: 2.4rem; animation: fadeIn 1s ease;}
+
+  .companies {
+    margin-top: 40px;
+    width: 90%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+  }
+  .card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-5px) scale(1.05);
+    border-color: #ff9933;
+    box-shadow: 0 0 25px #ff9933;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, #ff9933, #ff0066);
+    opacity: 0;
+    transition: 0.5s;
+  }
+  .card:hover::before {opacity: 0.25;}
+  .card h3 {position: relative; z-index: 1; font-size: 1.3rem;}
+
+  /* Question Section */
+  .question-section {
+    display: none;
+    width: 90%;
+    max-width: 950px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    animation: fadeInUp 1.5s ease;
+  }
+  .question-section h2 {color: #ff9933; margin-bottom: 20px;}
+  .question {
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  .question:hover {
+    background: rgba(255, 153, 51, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #ff9933;
+  }
+  .question a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .question a:hover {color: #ff9933;}
+
+  @keyframes fadeInUp {from {opacity: 0; transform: translateY(30px);} to {opacity: 1; transform: translateY(0);}}
+  @keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
+</style>
+</head>
+
+<body>
+<nav>
+  <div class="logo">GLA Company DSA</div>
+  <a href="index.html">⬅ Back to Home</a>
+</nav>
+
+<h1>🏢 Company-Wise DSA Questions</h1>
+
+<div class="companies" id="companyList"></div>
+
+<!-- Question Section -->
+<div class="question-section" id="questionSection">
+  <h2 id="companyTitle">Company Questions</h2>
+  <div id="questionContainer"></div>
+</div>
+
+<script>
+const companyQuestions = {
+  "Amazon": [
+    ["Two Sum", "https://leetcode.com/problems/two-sum/"],
+    ["LRU Cache", "https://leetcode.com/problems/lru-cache/"],
+    ["Trapping Rain Water", "https://leetcode.com/problems/trapping-rain-water/"],
+    ["Merge Intervals", "https://leetcode.com/problems/merge-intervals/"],
+    ["Longest Palindromic Substring", "https://leetcode.com/problems/longest-palindromic-substring/"],
+    ["Word Break", "https://leetcode.com/problems/word-break/"],
+    ["Kth Largest Element in Array", "https://leetcode.com/problems/kth-largest-element-in-an-array/"],
+    ["Longest Substring Without Repeating Characters", "https://leetcode.com/problems/longest-substring-without-repeating-characters/"],
+    ["Subarray Sum Equals K", "https://leetcode.com/problems/subarray-sum-equals-k/"],
+    ["Next Permutation", "https://leetcode.com/problems/next-permutation/"]
+  ],
+  "Google": [
+    ["Median of Two Sorted Arrays", "https://leetcode.com/problems/median-of-two-sorted-arrays/"],
+    ["Word Ladder", "https://leetcode.com/problems/word-ladder/"],
+    ["Course Schedule", "https://leetcode.com/problems/course-schedule/"],
+    ["Valid Parentheses", "https://leetcode.com/problems/valid-parentheses/"],
+    ["Maximum Product Subarray", "https://leetcode.com/problems/maximum-product-subarray/"],
+    ["Alien Dictionary", "https://leetcode.com/problems/alien-dictionary/"],
+    ["Pacific Atlantic Water Flow", "https://leetcode.com/problems/pacific-atlantic-water-flow/"],
+    ["Insert Interval", "https://leetcode.com/problems/insert-interval/"],
+    ["Merge K Sorted Lists", "https://leetcode.com/problems/merge-k-sorted-lists/"],
+    ["Largest Rectangle in Histogram", "https://leetcode.com/problems/largest-rectangle-in-histogram/"]
+  ],
+  "Microsoft": [
+    ["Clone Graph", "https://leetcode.com/problems/clone-graph/"],
+    ["Kth Largest Element in Array", "https://leetcode.com/problems/kth-largest-element-in-an-array/"],
+    ["Rotate Image", "https://leetcode.com/problems/rotate-image/"],
+    ["Set Matrix Zeroes", "https://leetcode.com/problems/set-matrix-zeroes/"],
+    ["Minimum Path Sum", "https://leetcode.com/problems/minimum-path-sum/"],
+    ["Spiral Matrix", "https://leetcode.com/problems/spiral-matrix/"],
+    ["Jump Game", "https://leetcode.com/problems/jump-game/"],
+    ["Decode Ways", "https://leetcode.com/problems/decode-ways/"],
+    ["Unique Paths", "https://leetcode.com/problems/unique-paths/"],
+    ["Maximum Depth of Binary Tree", "https://leetcode.com/problems/maximum-depth-of-binary-tree/"]
+  ],
+  "Netflix": [
+    ["Longest Increasing Subsequence", "https://leetcode.com/problems/longest-increasing-subsequence/"],
+    ["Find Peak Element", "https://leetcode.com/problems/find-peak-element/"],
+    ["Container With Most Water", "https://leetcode.com/problems/container-with-most-water/"],
+    ["Group Anagrams", "https://leetcode.com/problems/group-anagrams/"],
+    ["Combination Sum", "https://leetcode.com/problems/combination-sum/"],
+    ["Number of Islands", "https://leetcode.com/problems/number-of-islands/"],
+    ["3Sum", "https://leetcode.com/problems/3sum/"],
+    ["Validate Binary Search Tree", "https://leetcode.com/problems/validate-binary-search-tree/"],
+    ["Word Search", "https://leetcode.com/problems/word-search/"],
+    ["Search in Rotated Sorted Array", "https://leetcode.com/problems/search-in-rotated-sorted-array/"]
+  ],
+  "Adobe": [
+    ["Maximum Subarray", "https://leetcode.com/problems/maximum-subarray/"],
+    ["Subsets", "https://leetcode.com/problems/subsets/"],
+    ["Combination Sum II", "https://leetcode.com/problems/combination-sum-ii/"],
+    ["Permutations", "https://leetcode.com/problems/permutations/"],
+    ["Letter Combinations of a Phone Number", "https://leetcode.com/problems/letter-combinations-of-a-phone-number/"],
+    ["Spiral Matrix II", "https://leetcode.com/problems/spiral-matrix-ii/"],
+    ["Rotate List", "https://leetcode.com/problems/rotate-list/"],
+    ["Reverse Linked List II", "https://leetcode.com/problems/reverse-linked-list-ii/"],
+    ["Linked List Cycle", "https://leetcode.com/problems/linked-list-cycle/"],
+    ["Validate Palindrome", "https://leetcode.com/problems/valid-palindrome/"]
+  ],
+  "Flipkart": [
+    ["Search in Rotated Sorted Array", "https://leetcode.com/problems/search-in-rotated-sorted-array/"],
+    ["Find All Anagrams in a String", "https://leetcode.com/problems/find-all-anagrams-in-a-string/"],
+    ["Sliding Window Maximum", "https://leetcode.com/problems/sliding-window-maximum/"],
+    ["Coin Change", "https://leetcode.com/problems/coin-change/"],
+    ["Jump Game", "https://leetcode.com/problems/jump-game/"],
+    ["Find the Duplicate Number", "https://leetcode.com/problems/find-the-duplicate-number/"],
+    ["Next Greater Element", "https://leetcode.com/problems/next-greater-element-i/"],
+    ["Longest Common Prefix", "https://leetcode.com/problems/longest-common-prefix/"],
+    ["Palindrome Partitioning", "https://leetcode.com/problems/palindrome-partitioning/"],
+    ["Implement Trie (Prefix Tree)", "https://leetcode.com/problems/implement-trie-prefix-tree/"]
+  ],
+  "Apple": [
+    ["Add Two Numbers", "https://leetcode.com/problems/add-two-numbers/"],
+    ["Reverse Nodes in k-Group", "https://leetcode.com/problems/reverse-nodes-in-k-group/"],
+    ["LRU Cache", "https://leetcode.com/problems/lru-cache/"],
+    ["Merge Two Sorted Lists", "https://leetcode.com/problems/merge-two-sorted-lists/"],
+    ["Valid Anagram", "https://leetcode.com/problems/valid-anagram/"],
+    ["Reorder List", "https://leetcode.com/problems/reorder-list/"],
+    ["Binary Tree Zigzag Level Order Traversal", "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/"],
+    ["Binary Search", "https://leetcode.com/problems/binary-search/"],
+    ["Roman to Integer", "https://leetcode.com/problems/roman-to-integer/"],
+    ["Longest Palindrome", "https://leetcode.com/problems/longest-palindrome/"]
+  ],
+  "Uber": [
+    ["Merge K Sorted Lists", "https://leetcode.com/problems/merge-k-sorted-lists/"],
+    ["Longest Consecutive Sequence", "https://leetcode.com/problems/longest-consecutive-sequence/"],
+    ["Word Ladder II", "https://leetcode.com/problems/word-ladder-ii/"],
+    ["LRU Cache", "https://leetcode.com/problems/lru-cache/"],
+    ["Meeting Rooms II", "https://leetcode.com/problems/meeting-rooms-ii/"],
+    ["Reorder Data in Log Files", "https://leetcode.com/problems/reorder-data-in-log-files/"],
+    ["Find Median from Data Stream", "https://leetcode.com/problems/find-median-from-data-stream/"],
+    ["Course Schedule II", "https://leetcode.com/problems/course-schedule-ii/"],
+    ["Minimum Window Substring", "https://leetcode.com/problems/minimum-window-substring/"],
+    ["Decode String", "https://leetcode.com/problems/decode-string/"]
+  ],
+  "Paytm": [
+    ["Two Sum", "https://leetcode.com/problems/two-sum/"],
+    ["Rotate Image", "https://leetcode.com/problems/rotate-image/"],
+    ["Jump Game II", "https://leetcode.com/problems/jump-game-ii/"],
+    ["Container With Most Water", "https://leetcode.com/problems/container-with-most-water/"],
+    ["Spiral Matrix", "https://leetcode.com/problems/spiral-matrix/"],
+    ["Search a 2D Matrix", "https://leetcode.com/problems/search-a-2d-matrix/"],
+    ["Plus One", "https://leetcode.com/problems/plus-one/"],
+    ["Implement strStr()", "https://leetcode.com/problems/implement-strstr/"],
+    ["Pow(x, n)", "https://leetcode.com/problems/powx-n/"],
+    ["Longest Common Subsequence", "https://leetcode.com/problems/longest-common-subsequence/"]
+  ]
+};
+
+const companyList = document.getElementById("companyList");
+const questionSection = document.getElementById("questionSection");
+const questionContainer = document.getElementById("questionContainer");
+const companyTitle = document.getElementById("companyTitle");
+
+// Show all companies
+Object.keys(companyQuestions).forEach(company => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `<h3>${company}</h3>`;
+  div.onclick = () => showQuestions(company);
+  companyList.appendChild(div);
+});
+
+// Show question list for selected company
+function showQuestions(company) {
+  companyTitle.textContent = `${company} - Frequently Asked DSA Questions`;
+  questionContainer.innerHTML = "";
+  companyQuestions[company].forEach(([q, link]) => {
+    const qDiv = document.createElement("div");
+    qDiv.className = "question";
+    qDiv.innerHTML = `<a href="${link}" target="_blank">${q}</a>`;
+    questionContainer.appendChild(qDiv);
+  });
+  questionSection.style.display = "block";
+  questionSection.scrollIntoView({behavior: "smooth"});
+}
+</script>
+</body>
+</html>
